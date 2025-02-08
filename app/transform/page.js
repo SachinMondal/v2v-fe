@@ -64,7 +64,7 @@ export default function VideoTransform() {
       console.log("FormData Content:", formData.get("video"));
 
       const res = await axios.post(
-        "http://localhost:5000/api/upload",
+        `${process.env.NEXT_PUBLIC_BACKEND}/api/upload`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -100,7 +100,7 @@ export default function VideoTransform() {
     try {
       console.log(transformData);
       const res = await axios.post(
-        "http://localhost:5000/api/transform",
+        `${process.env.NEXT_PUBLIC_BACKEND}/api/transform`,
         transformData
       );
       

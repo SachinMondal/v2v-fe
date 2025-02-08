@@ -11,7 +11,7 @@ export default function History() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/history");
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/api/history`);
         console.log("History fetched", res.data);
         setHistory(res.data);
       } catch (error) {
