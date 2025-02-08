@@ -129,16 +129,30 @@ export default function VideoTransform() {
     }
   };
 
-  const handleDownload = () => {
-    if (transformedUrl) {
-      const a = document.createElement("a");
-      a.href = transformedUrl;
-      a.download = "transformed_video.mp4";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+  const handleDownload = async () => {
+    try {
+      // Fetch the file as a Blob
+      const response = await fetch(transformedUrl);
+      const blob = await response.blob();
+  
+      
+      const blobUrl = URL.createObjectURL(blob);
+  
+      
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "transformed_video.mp4"; 
+      document.body.appendChild(link);
+      link.click();
+  
+      // Cleanup
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Error downloading file:", error);
     }
   };
+  
   return (
     <>
       <Navbar />
