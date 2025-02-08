@@ -69,7 +69,7 @@ export default function VideoTransform() {
         }
       );
       if (type == "audio") {
-        setAudioFileState(res.data.video);
+        setAudioUrl(res.data.video);
       } else {
         setVideoUrlState(res.data.video);
       }
@@ -81,7 +81,12 @@ export default function VideoTransform() {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    if (videoFile) {
+      uploadToCloudinary(videoFile, "video");
+    }
+  }, [videoFile]);
+  
   const handleTransform = async () => {
     if (!videoUrl) return toast.error("Upload a video first!");
     setTransformLoading(true);
@@ -90,6 +95,7 @@ export default function VideoTransform() {
       uploadedAudioUrl = await uploadToCloudinary(audioFile, "audio");
       setAudioUrl(uploadedAudioUrl);
     }
+    
     console.log(uploadedAudioUrl);
     const parameters = { audio_url: uploadedAudioUrl };
 
@@ -232,13 +238,13 @@ export default function VideoTransform() {
           </div>
           <div className="mt-2">Preview</div>
           {transformedUrl && (
-            <button
+            <a
               href={transformedUrl}
               download
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor:pointer"
             >
               Download Transformed Video
-            </button>
+            </a>
           )}
         </div>
       </div>
