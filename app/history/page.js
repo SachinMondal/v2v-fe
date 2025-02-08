@@ -12,7 +12,6 @@ export default function History() {
     const fetchHistory = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND}/api/history`);
-        console.log("History fetched", res.data);
         setHistory(res.data);
       } catch (error) {
         console.error("Error fetching history", error);
