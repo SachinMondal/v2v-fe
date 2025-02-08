@@ -129,6 +129,16 @@ export default function VideoTransform() {
     }
   };
 
+  const handleDownload = () => {
+    if (transformedUrl) {
+      const a = document.createElement("a");
+      a.href = transformedUrl;
+      a.download = "transformed_video.mp4";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -238,13 +248,12 @@ export default function VideoTransform() {
           </div>
           <div className="mt-2">Preview</div>
           {transformedUrl && (
-            <a
-              href={transformedUrl}
-              download
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor:pointer"
-            >
-              Download Transformed Video
-            </a>
+           <button
+           onClick={handleDownload}
+           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded cursor-pointer"
+         >
+           Download Transformed Video
+         </button>
           )}
         </div>
       </div>
