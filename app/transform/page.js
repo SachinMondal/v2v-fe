@@ -197,7 +197,7 @@ export default function VideoTransform() {
           <div className="mt-4">
             <label className="mb-2 mr-4">Audio File:</label>
             <input
-              className="w-full max-w-md text-white"
+              className="w-full max-w-md text-black"
               type="file"
               accept="audio/*"
               onChange={(e) => setAudioFile(e.target.files[0])}
